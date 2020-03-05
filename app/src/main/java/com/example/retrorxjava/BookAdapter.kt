@@ -6,17 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.example.retrorxjava.model.BookResponse
+import com.example.retrorxjava.databinding.ItemListBinding
+import com.example.retrorxjava.model.Book
 
 class BookAdapter(
-    private val bookList: ArrayList<BookResponse> = arrayListOf()
+    private var bookList: List<Book> = emptyList()
 
 ) : RecyclerView.Adapter<BookViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        val inflater = LayoutInflater.from(parent.context)
-        return BookViewHolder(inflater.inflate(R.layout.item_list, parent, false))
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding = ItemListBinding.inflate(layoutInflater, parent, false)
+        return BookViewHolder(binding)
 
 
     }
@@ -25,8 +28,8 @@ class BookAdapter(
         return bookList.size
     }
 
-    fun setList(list: List<BookResponse>) {
-        bookList.addAll(list)
+    fun setList(list: List<Book>) {
+        this.bookList = list
         notifyDataSetChanged()
     }
 
@@ -37,22 +40,12 @@ class BookAdapter(
     }
 }
 
-class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val bookId: TextView = itemView.findViewById(R.id.bookId)
-    private val bookName: TextView = itemView.findViewById(R.id.bookName)
-    private val bookUrl: TextView = itemView.findViewById(R.id.bookUrl)
-    private val bookAuthor: TextView = itemView.findViewById(R.id.author)
+class BookViewHolder(val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
 
+    fun bindModel(it: Book) {
 
-    fun bindModel(movie: BookResponse) {
-        val d = (movie.items)
-         d.forEach {
-             bookId.text = it.id
-             bookName.text = it.title
-             bookUrl.text = it.url
-             bookAuthor.text = it.author
+        binding.book = it
 
-        }
 
     }
 
