@@ -1,72 +1,45 @@
 package com.example.retrorxjava
 
 import android.util.Log
-import androidx.constraintlayout.widget.Constraints.TAG
 import androidx.lifecycle.MutableLiveData
 import com.example.retrorxjava.Network.Api
 import com.example.retrorxjava.model.BookResponse
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import java.lang.Error
 
 
 class BookViewModel(
     private val api: Api
 ) : BaseViewModel() {
-    var showBooksList1 = MutableLiveData<MutableList<BookResponse>>()
+    var showBooksList1 = MutableLiveData<BookResponse>()
 
 
-    override fun onViewAttached(firstAttach: Boolean) {
-        super.onViewAttached(firstAttach)
-
-    }
-
-    fun data(list:List<BookResponse>) {
+    private var compositeDisposable = CompositeDisposable()
 
 
-        val showBooksList = api.getMovies()
-            .subscribeOn(Schedulers.io()) // designate worker thread (background)
-            .observeOn(AndroidSchedulers.mainThread())  //designate observer thread (main thread)
+    fun response(callbck:Apiresult) {
 
-
-
-        showBooksList.subscribe(object : Observer<BookResponse> {
-            override fun onSubscribe(d: Disposable) {
-                Log.d(TAG, "onSubscribe : : called. ")
-                addToDisposable(d)
-            }
-
-            override fun onNext(t: BookResponse) {
-                Log.d(TAG, "onNext: : " + Thread.currentThread().name)
-                Log.d(TAG, "onNext: : " + (t.items.forEach {
-                    it.id
-
-                }
-                        )
-
-                )
-
-
-            }
-
-
-            override fun onError(e: Throwable) {
-                Log.d(TAG, "onError: :", e)
-            }
-
-            override fun onComplete() {
-                Log.d(TAG, "onComplete: : called. ")
-            }
-        })
-
+        compositeDisposable.add(
+            api.getMovies().subscribeOn(Schedulers.io()).observeOn(
+                AndroidSchedulers.mainThread()
+            ).subscribe({
+                showBooksList1.value=it
+               callbck.onSucess(showBooksList1)
+            }, {
+               callbck.onError("bfgdg")
+            })
+        )
 
     }
 
-    override fun onCleared() {
 
-        super.onCleared()
-    }
+}
+
+interface Apiresult{
+    fun onSucess(data:Any)
+    fun onError(error: String)
 }
 
 //Create an Observable
