@@ -12,5 +12,5 @@ data class BookResponse (
     @SerializedName("home_page_url")
     var home_page_url: String? = null,
     @SerializedName("items")
-     var items : List<Book>
+     var items : MutableList<Book>
 )
