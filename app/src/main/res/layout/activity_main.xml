@@ -7,7 +7,7 @@
     <data>
         <variable
             name="bookview"
-            type="com.example.retrorxjava.BookViewModel" />
+            type="com.example.retrorxjava.viewmodel.BookViewModel" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout
