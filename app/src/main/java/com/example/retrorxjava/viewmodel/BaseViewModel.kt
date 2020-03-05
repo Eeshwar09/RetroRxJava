@@ -1,4 +1,4 @@
-package com.example.retrorxjava
+package com.example.retrorxjava.viewmodel
 
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
