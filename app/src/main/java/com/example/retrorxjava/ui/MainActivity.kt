@@ -12,11 +12,10 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.retrorxjava.Apiresult
+import com.example.retrorxjava.viewmodel.Apiresult
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import com.example.retrorxjava.BookAdapter
-import com.example.retrorxjava.BookViewModel
+import com.example.retrorxjava.viewmodel.BookViewModel
 import com.example.retrorxjava.model.BookResponse
 
 
