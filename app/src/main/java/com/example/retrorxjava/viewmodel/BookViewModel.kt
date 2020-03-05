@@ -1,13 +1,11 @@
-package com.example.retrorxjava
+package com.example.retrorxjava.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.retrorxjava.Network.Api
+import com.example.retrorxjava.network.Api
 import com.example.retrorxjava.model.BookResponse
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.lang.Error
 
 
 class BookViewModel(
@@ -19,7 +17,7 @@ class BookViewModel(
     private var compositeDisposable = CompositeDisposable()
 
 
-    fun response(callbck:Apiresult) {
+    fun response(callbck: Apiresult) {
 
         compositeDisposable.add(
             api.getMovies().subscribeOn(Schedulers.io()).observeOn(
