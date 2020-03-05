@@ -1,6 +1,7 @@
-package com.example.retrorxjava
+package com.example.retrorxjava.di
 
-import com.example.retrorxjava.Network.Api
+import com.example.retrorxjava.viewmodel.BookViewModel
+import com.example.retrorxjava.network.Api
 import com.example.retrorxjava.utils.AppConfig.baseUrl
 import com.google.gson.GsonBuilder
 import io.reactivex.schedulers.Schedulers
