@@ -19,61 +19,87 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_marginStart="8dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginLeft="8dp">
         <TextView
             android:id="@+id/bookId"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:textColorLink="@color/colorBlue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginLeft="4dp"
+            android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@{book.id}"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            android:layout_marginStart="8dp" />
 
         <TextView
             android:id="@+id/bookTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:layout_marginLeft="8dp"
             android:text="@{book.title}"
             app:layout_constraintEnd_toEndOf="@+id/bookId"
             app:layout_constraintStart_toStartOf="@+id/bookId"
             app:layout_constraintTop_toBottomOf="@+id/bookId"
-            tools:ignore="HardcodedText" />
+            tools:ignore="HardcodedText"
+            android:layout_marginStart="8dp" />
+    <TextView
+        android:id="@+id/bookHtml"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:autoLink="web"
+        android:linksClickable="true"
+        android:textColorLink="@color/colorBlue"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/bookTitle"
+        app:layout_constraintStart_toStartOf="@+id/bookTitle"
+        app:layout_constraintTop_toBottomOf="@+id/bookTitle"
+        tools:ignore="HardcodedText" />
 
-        <TextView
-            android:id="@+id/bookHtml"
+
+    <TextView
+            android:id="@+id/bookUrl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="@{book.content_html}"
-            app:layout_constraintEnd_toEndOf="@+id/bookTitle"
-            app:layout_constraintStart_toStartOf="@+id/bookTitle"
-            app:layout_constraintTop_toBottomOf="@+id/bookTitle"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:textColorLink="@color/colorBlue"
+            android:text="@{book.url}"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/bookHtml"
+            app:layout_constraintStart_toStartOf="@+id/bookHtml"
+            app:layout_constraintTop_toBottomOf="@+id/bookHtml"
             tools:ignore="HardcodedText" />
 
-            <TextView
-                android:id="@+id/bookUrl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:text="@{book.url}"
-                app:layout_constraintEnd_toEndOf="@+id/bookHtml"
-                app:layout_constraintStart_toStartOf="@+id/bookHtml"
-                app:layout_constraintTop_toBottomOf="@+id/bookHtml"
-                tools:ignore="HardcodedText" />
+
         <TextView
             android:id="@+id/external_url"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
+            android:autoLink="web"
+            android:linksClickable="true"
+            android:textColorLink="@color/colorBlue"
             android:text="@{book.external_url}"
             app:layout_constraintEnd_toEndOf="@+id/bookUrl"
             app:layout_constraintStart_toStartOf="@+id/bookUrl"
             app:layout_constraintTop_toBottomOf="@+id/bookUrl"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             tools:ignore="HardcodedText" />
         <TextView
             android:id="@+id/date_published"
@@ -84,6 +110,8 @@
             app:layout_constraintEnd_toEndOf="@+id/external_url"
             app:layout_constraintStart_toStartOf="@+id/external_url"
             app:layout_constraintTop_toBottomOf="@+id/external_url"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             tools:ignore="HardcodedText" />
         <TextView
             android:id="@+id/author"
@@ -91,11 +119,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="@{book.author}"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="@+id/date_published"
             app:layout_constraintStart_toStartOf="@+id/date_published"
             app:layout_constraintTop_toBottomOf="@+id/date_published"
             tools:ignore="HardcodedText" />
 
-
+</LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
