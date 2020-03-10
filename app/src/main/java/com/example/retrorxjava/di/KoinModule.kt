@@ -1,5 +1,8 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.retrorxjava.di
 
+import android.preference.PreferenceManager
 import com.example.retrorxjava.viewmodel.BookViewModel
 import com.example.retrorxjava.network.Api
 import com.example.retrorxjava.utils.AppConfig.baseUrl
@@ -14,11 +17,16 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-
 val retrofitModule = module {
+    single {
+        val defaultSharedPreferences =
+            PreferenceManager.getDefaultSharedPreferences(get())
+        defaultSharedPreferences
+    }
+
 
     viewModel {
-        BookViewModel(get())
+        BookViewModel(api = get())
     }
 
 
@@ -29,15 +37,15 @@ val retrofitModule = module {
 }
 
 val gson = GsonBuilder().serializeNulls().create()!!
-private fun createOkHttpClient():OkHttpClient  {
+private fun createOkHttpClient(): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     return OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor).build()
 }
 
-private fun retrofit(okHttpClient: OkHttpClient):Retrofit {
-   return Retrofit.Builder()
+private fun retrofit(okHttpClient: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
         .callFactory(OkHttpClient.Builder().build())
         .baseUrl(baseUrl)
         .addConverterFactory(GsonConverterFactory.create(gson))
@@ -46,8 +54,6 @@ private fun retrofit(okHttpClient: OkHttpClient):Retrofit {
         .build()
 
 }
-
-
 
 
 private fun provideForecastApi(retrofit: Retrofit): Api {
