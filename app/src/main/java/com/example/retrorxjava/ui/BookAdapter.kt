@@ -2,6 +2,7 @@
 
 package com.example.retrorxjava.ui
 
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,7 +10,7 @@ import com.example.retrorxjava.databinding.ItemListBinding
 import com.example.retrorxjava.model.Book
 
 class BookAdapter(
-    private var bookList: List<Book> = emptyList()
+    var bookList: List<Book> = emptyList()
 
 ) : RecyclerView.Adapter<BookViewHolder>() {
 
@@ -32,17 +33,16 @@ class BookAdapter(
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         holder.bindModel(bookList[position])
-
-
     }
 }
 
 class BookViewHolder(val binding: ItemListBinding) : RecyclerView.ViewHolder(binding.root) {
+    val b = binding.bookHtml
+
 
     fun bindModel(it: Book) {
-
         binding.book = it
-
+        b.setText(Html.fromHtml(Html.fromHtml(it.content_html).toString()))
 
     }
 
