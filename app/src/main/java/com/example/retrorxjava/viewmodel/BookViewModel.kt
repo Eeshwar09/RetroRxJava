@@ -23,7 +23,7 @@ class BookViewModel(
             api.getMovies().subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()
             ).subscribe({
-                showBooksList1.value=it
+               // showBooksList1.value=it
                callbck.onSucess(showBooksList1)
             }, {
                callbck.onError("bfgdg")
@@ -35,9 +35,9 @@ class BookViewModel(
 
 }
 
-interface Apiresult{
-    fun onSucess(data:Any)
-    fun onError(error: String)
+interface Apiresult {
+    fun onSucess(data: Any?)
+    fun onError(error: String?)
 }
 
 //Create an Observable
