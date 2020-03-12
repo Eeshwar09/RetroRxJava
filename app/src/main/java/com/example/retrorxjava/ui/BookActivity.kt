@@ -13,18 +13,17 @@ import com.example.retrorxjava.model.BookResponse
 import com.example.retrorxjava.viewmodel.Apiresult
 import com.example.retrorxjava.viewmodel.BookViewModel
 import io.reactivex.Observer
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_book.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookActivity : AppCompatActivity(), Apiresult {
     private val mainViewModel by viewModel<BookViewModel>()
-    private val adapter: BookAdapter by lazy { BookAdapter() }
+    private val adapter: BookAdapter by lazy { BookAdapter(this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
 
         books_list.layoutManager = LinearLayoutManager(this)
-        books_list.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         books_list.setHasFixedSize(true)
         books_list.adapter = adapter
         mainViewModel.showBooksList1
@@ -39,8 +38,9 @@ class BookActivity : AppCompatActivity(), Apiresult {
 
 
     }
+
     override fun onSucess(data: Any?) {
-         val bookResponse = data as BookResponse
+        val bookResponse = data as BookResponse
         setAdapter(bookResponse.items as List<Book>)
 
 
