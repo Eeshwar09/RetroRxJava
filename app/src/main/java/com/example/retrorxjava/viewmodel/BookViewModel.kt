@@ -24,7 +24,7 @@ class BookViewModel(
                 AndroidSchedulers.mainThread()
             ).subscribe({
                // showBooksList1.value=it
-               callbck.onSucess(showBooksList1)
+               callbck.onSucess(it)
             }, {
                callbck.onError("bfgdg")
             })
