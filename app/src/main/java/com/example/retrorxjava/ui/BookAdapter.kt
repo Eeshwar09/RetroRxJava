@@ -2,6 +2,7 @@
 
 package com.example.retrorxjava.ui
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -11,7 +12,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrorxjava.databinding.ItemListBinding
+import com.example.retrorxjava.helper.DateHelper
 import com.example.retrorxjava.model.Book
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BookAdapter(
     var context: Context,
@@ -41,36 +45,36 @@ class BookAdapter(
     }
 }
 
+@Suppress("CAST_NEVER_SUCCEEDS")
 class BookViewHolder(val binding: ItemListBinding, val context: Context) :
     RecyclerView.ViewHolder(binding.root) {
-    val b = binding.bookUrl
-    val c = binding.bookHtml
+    val bookUrl = binding.bookUrl
     val title = binding.bookTitle
-    val comment = binding.externalUrl
-    val id = binding.bookId
+    val id = binding.datepublished
 
 
+
+
+    @SuppressLint("SimpleDateFormat")
     fun bindModel(it: Book) {
+
         binding.book = it
-        c.setText(Html.fromHtml(Html.fromHtml(it.content_html!!.removeRange(1, 31)).toString()))
+        val date = it.date_published
+        val formateedDate=DateHelper.Date(date!!)
+        id.setText(formateedDate)
+
         title.setOnClickListener {
-            url(b)
+            val url = bookUrl.getText().toString()
+            val bookTitle = title.getText().toString()
+            val intent = Intent(context, ArticleActivity::class.java)
+            intent.putExtra("webUrl", url)
+            intent.putExtra("title",bookTitle)
+            context.startActivity(intent)
 
-        }
-        comment.setOnClickListener {
-
-            url(id)
         }
 
 
     }
 
-
-    private fun url(text: TextView) {
-        val url = text.getText().toString()
-        val i = Intent(Intent.ACTION_VIEW)
-        i.data = Uri.parse(url)
-        context.startActivity(i)
-    }
 
 }
