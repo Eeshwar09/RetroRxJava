@@ -110,35 +110,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/bookHtml"
                     tools:ignore="HardcodedText" />
 
-
-                <TextView
-                    android:id="@+id/external_url"
-                    android:layout_width="wrap_content"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/bookUrl"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="12dp"
-                    android:autoLink="web"
-                    android:linksClickable="true"
-                    android:text="Comments"
-                    android:textColorLink="@color/colorBlue"
-                    app:layout_constraintEnd_toEndOf="@+id/bookUrl"
-                    app:layout_constraintStart_toStartOf="@+id/bookUrl"
-                    app:layout_constraintTop_toBottomOf="@+id/bookUrl"
-                    tools:ignore="HardcodedText" />
-
-                <TextView
-                    android:id="@+id/date_published"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="12dp"
-                    android:text="@{book.date_published}"
-                    app:layout_constraintEnd_toEndOf="@+id/external_url"
-                    app:layout_constraintStart_toStartOf="@+id/external_url"
-                    app:layout_constraintTop_toBottomOf="@+id/external_url"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="NotSibling">
 
                 <TextView
                     android:id="@+id/author"
@@ -147,13 +124,27 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="12dp"
+                    android:layout_gravity="bottom"
                     android:text="@{book.author}"
-                    app:layout_constraintEnd_toEndOf="@+id/date_published"
-                    app:layout_constraintStart_toStartOf="@+id/date_published"
-                    app:layout_constraintTop_toBottomOf="@+id/date_published"
+                    tools:text="fhjgjgjjg"
                     tools:ignore="HardcodedText" />
 
+                <TextView
+                    android:id="@+id/datepublished"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    tools:text="DATE"
+                    android:gravity="bottom"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="12dp"
+                    tools:ignore="HardcodedText,RelativeOverlap"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp" />
 
+                </RelativeLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
