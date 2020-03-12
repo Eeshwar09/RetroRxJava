@@ -14,6 +14,7 @@ import com.example.retrorxjava.viewmodel.Apiresult
 import com.example.retrorxjava.viewmodel.BookViewModel
 import io.reactivex.Observer
 import kotlinx.android.synthetic.main.activity_book.*
+import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class BookActivity : AppCompatActivity(), Apiresult {
@@ -22,6 +23,7 @@ class BookActivity : AppCompatActivity(), Apiresult {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
+        toolbar.title = getString(R.string.app_name)
 
         books_list.layoutManager = LinearLayoutManager(this)
         books_list.setHasFixedSize(true)
