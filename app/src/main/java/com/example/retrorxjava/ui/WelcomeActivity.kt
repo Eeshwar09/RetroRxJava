@@ -15,11 +15,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.animation.ObjectAnimator
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
-
-
-
+import kotlinx.android.synthetic.main.toolbar.*
 
 
 class WelcomeActivity : AppCompatActivity() {
@@ -31,14 +27,13 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_welcome)
         splashProgress = findViewById(R.id.splashProgress);
         playProgress();
+        toolbar.title = getString(R.string.app_name)
 
 
         Handler().postDelayed({
-            //Do any action here. Now we are moving to next page
             val mySuperIntent = Intent(this,BookActivity::class.java)
             startActivity(mySuperIntent)
 
-            //This 'finish()' is for exiting the app when back button pressed from Home page which is ActivityHome
             finish()
         }, SPLASH_TIME.toLong())
 
