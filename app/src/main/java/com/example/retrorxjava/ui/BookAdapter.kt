@@ -51,15 +51,15 @@ class BookAdapter(
 @Suppress("CAST_NEVER_SUCCEEDS")
 class BookViewHolder(val binding: ItemListBinding, val context: Context) :
     RecyclerView.ViewHolder(binding.root) {
-    val title = binding.bookTitle
-    val id = binding.datepublished
-    val b = binding.bookUrl
+    val date = binding.datepublished
 
 
 
     @SuppressLint("SimpleDateFormat")
     fun bindModel(it: Book, booklist: ArrayList<Book>) {
         binding.book = it
+       val Date= DateHelper.Date(it.date_published.toString())
+        date.text =Date
 
         itemView.setOnClickListener { v ->
             val pos = adapterPosition
