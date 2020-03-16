@@ -1,5 +1,8 @@
 package com.example.retrorxjava.model
 
+import java.io.Serializable
+
+
 data class Book(
     var id: String? = null,
     var title: String? = null,
@@ -9,7 +12,7 @@ data class Book(
     var date_published: String? = null,
     var author: String? = null
 
-)
+):Serializable
 
 
 
