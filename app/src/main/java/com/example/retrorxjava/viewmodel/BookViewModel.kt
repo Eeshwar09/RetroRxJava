@@ -23,10 +23,9 @@ class BookViewModel(
             api.getMovies().subscribeOn(Schedulers.io()).observeOn(
                 AndroidSchedulers.mainThread()
             ).subscribe({
-               // showBooksList1.value=it
                callbck.onSucess(it)
             }, {
-               callbck.onError("bfgdg")
+               callbck.onError("error")
             })
         )
 
