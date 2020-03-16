@@ -5,21 +5,24 @@ package com.example.retrorxjava.ui
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.retrorxjava.databinding.ItemListBinding
 import com.example.retrorxjava.helper.DateHelper
 import com.example.retrorxjava.model.Book
-import java.text.SimpleDateFormat
-import java.util.*
+import java.util.ArrayList
+import android.os.Bundle
+import java.io.Serializable
+import androidx.core.content.ContextCompat.startActivity
+import android.R.array
+import android.widget.Toast
 
+
+@Suppress("UNCHECKED_CAST")
 class BookAdapter(
     var context: Context,
-    var bookList: List<Book> = emptyList()
+    var bookList: List<Any> = emptyList()
 
 ) : RecyclerView.Adapter<BookViewHolder>() {
 
@@ -41,38 +44,30 @@ class BookAdapter(
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        holder.bindModel(bookList[position])
+        holder.bindModel(bookList[position] as Book, bookList as ArrayList<Book>)
     }
 }
 
 @Suppress("CAST_NEVER_SUCCEEDS")
 class BookViewHolder(val binding: ItemListBinding, val context: Context) :
     RecyclerView.ViewHolder(binding.root) {
-    val bookUrl = binding.bookUrl
     val title = binding.bookTitle
     val id = binding.datepublished
-
+    val b = binding.bookUrl
 
 
 
     @SuppressLint("SimpleDateFormat")
-    fun bindModel(it: Book) {
-
+    fun bindModel(it: Book, booklist: ArrayList<Book>) {
         binding.book = it
-        val date = it.date_published
-        val formateedDate=DateHelper.Date(date!!)
-        id.setText(formateedDate)
 
-        title.setOnClickListener {
-            val url = bookUrl.getText().toString()
-            val bookTitle = title.getText().toString()
+        itemView.setOnClickListener { v ->
+            val pos = adapterPosition
             val intent = Intent(context, ArticleActivity::class.java)
-            intent.putExtra("webUrl", url)
-            intent.putExtra("title",bookTitle)
+            intent.putExtra("Position",pos)
+            intent.putExtra("BookList", booklist )
             context.startActivity(intent)
-
         }
-
 
     }
 
