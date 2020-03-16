@@ -14,9 +14,11 @@
         <item name="actionMenuTextAppearance">@style/MenuActionText</item>
         <item name="actionMenuTextColor">@color/white</item>
     </style>
+
     <style name="TextBold">
         <item name="android:textStyle">bold</item>
     </style>
+
     <style name="MenuActionText" parent="TextBold">
         <item name="android:textAllCaps">true</item>
         <item name="android:textSize">14sp</item>
@@ -24,17 +26,19 @@
         <item name="android:letterSpacing" tools:ignore="NewApi">0.11</item>
         <item name="android:lineSpacingExtra">1sp</item>
     </style>
+
     <style name="AppTheme.Toolbar" parent="AppTheme">
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:textColorSecondary">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
     </style>
+
     <style name="Toolbar">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">?attr/actionBarSize</item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:elevation" tools:ignore="NewApi">1dp</item>
     </style>
+
     <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textSize">22sp</item>
         <item name="android:letterSpacing" tools:ignore="NewApi">0.01</item>
