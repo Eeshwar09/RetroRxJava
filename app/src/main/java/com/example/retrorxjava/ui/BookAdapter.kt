@@ -12,17 +12,12 @@ import com.example.retrorxjava.databinding.ItemListBinding
 import com.example.retrorxjava.helper.DateHelper
 import com.example.retrorxjava.model.Book
 import java.util.ArrayList
-import android.os.Bundle
-import java.io.Serializable
-import androidx.core.content.ContextCompat.startActivity
-import android.R.array
-import android.widget.Toast
 
 
 @Suppress("UNCHECKED_CAST")
 class BookAdapter(
-    var context: Context,
-    var bookList: List<Any> = emptyList()
+    private var context: Context,
+    private var bookList: List<Any> = emptyList()
 
 ) : RecyclerView.Adapter<BookViewHolder>() {
 
@@ -49,22 +44,22 @@ class BookAdapter(
 }
 
 @Suppress("CAST_NEVER_SUCCEEDS")
-class BookViewHolder(val binding: ItemListBinding, val context: Context) :
+class BookViewHolder(private val binding: ItemListBinding, private val context: Context) :
     RecyclerView.ViewHolder(binding.root) {
-    val date = binding.datepublished
+    private val date = binding.datepublished
 
 
     @SuppressLint("SimpleDateFormat")
-    fun bindModel(it: Book, booklist: ArrayList<Book>) {
+    fun bindModel(it: Book, bookList: ArrayList<Book>) {
         binding.book = it
-        val Date = DateHelper.Date(it.date_published.toString())
-        date.text = Date
+        val datePublished = DateHelper.Date(it.date_published.toString())
+        date.text = datePublished
 
-        itemView.setOnClickListener { v ->
+        itemView.setOnClickListener {
             val pos = adapterPosition
             val intent = Intent(context, ArticleActivity::class.java)
             intent.putExtra("Position", pos)
-            intent.putExtra("BookList", booklist)
+            intent.putExtra("BookList", bookList)
             context.startActivity(intent)
         }
 
