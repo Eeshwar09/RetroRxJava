@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
     style="@style/Toolbar"
+    android:minHeight="90dp"
     android:theme="@style/AppTheme.Toolbar"
     app:collapseIcon="@null"
     app:contentInsetStart="15dp"
-    app:theme="@style/AppTheme.Toolbar"
-    app:titleTextAppearance="@style/Toolbar.TitleText"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    app:theme="@style/AppTheme.Toolbar">
 
     <ImageView
         android:id="@+id/backButton"
@@ -20,13 +20,14 @@
         android:layout_centerVertical="true"
         android:src="@drawable/ic_arrow_back"
         tools:ignore="ContentDescription" />
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
 
         <TextView
-            android:id="@+id/profilename"
+            android:id="@+id/titlename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -36,5 +37,5 @@
             android:textColor="#ffffff"
             android:textSize="20sp"
             tools:ignore="HardcodedText,RtlSymmetry" />
-        </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
+    </RelativeLayout>
+</androidx.appcompat.widget.Toolbar>
