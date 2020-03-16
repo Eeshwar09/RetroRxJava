@@ -54,18 +54,17 @@ class BookViewHolder(val binding: ItemListBinding, val context: Context) :
     val date = binding.datepublished
 
 
-
     @SuppressLint("SimpleDateFormat")
     fun bindModel(it: Book, booklist: ArrayList<Book>) {
         binding.book = it
-       val Date= DateHelper.Date(it.date_published.toString())
-        date.text =Date
+        val Date = DateHelper.Date(it.date_published.toString())
+        date.text = Date
 
         itemView.setOnClickListener { v ->
             val pos = adapterPosition
             val intent = Intent(context, ArticleActivity::class.java)
-            intent.putExtra("Position",pos)
-            intent.putExtra("BookList", booklist )
+            intent.putExtra("Position", pos)
+            intent.putExtra("BookList", booklist)
             context.startActivity(intent)
         }
 
