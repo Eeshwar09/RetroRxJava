@@ -3,20 +3,19 @@ package com.example.retrorxjava.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.retrorxjava.R
 import com.example.retrorxjava.helper.NetworkHelper
 import com.example.retrorxjava.model.Book
 import com.example.retrorxjava.model.BookResponse
 import com.example.retrorxjava.viewmodel.Apiresult
 import com.example.retrorxjava.viewmodel.BookViewModel
-import io.reactivex.Observer
 import kotlinx.android.synthetic.main.activity_book.*
 import kotlinx.android.synthetic.main.toolbar.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+@Suppress("CAST_NEVER_SUCCEEDS")
 class BookActivity : AppCompatActivity(), Apiresult {
     private val mainViewModel by viewModel<BookViewModel>()
     private val adapter: BookAdapter by lazy { BookAdapter(this) }
@@ -28,7 +27,7 @@ class BookActivity : AppCompatActivity(), Apiresult {
         books_list.layoutManager = LinearLayoutManager(this)
         books_list.setHasFixedSize(true)
         books_list.adapter = adapter
-        mainViewModel.showBooksList1
+
 
         when {
             NetworkHelper.isNetworkConnected(this) -> mainViewModel.response(this)
