@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.retrorxjava.helper
 
 import android.content.Context
