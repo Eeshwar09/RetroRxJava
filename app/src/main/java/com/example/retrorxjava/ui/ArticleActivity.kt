@@ -1,99 +1,151 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.retrorxjava.ui
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.net.MailTo
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.retrorxjava.R
 import android.webkit.WebView
 import android.net.Uri
 import android.view.View
-import androidx.lifecycle.Observer
 import com.example.retrorxjava.model.Book
-import com.example.retrorxjava.viewmodel.BookViewModel
 import kotlinx.android.synthetic.main.activity_article.*
 import kotlinx.android.synthetic.main.toolbar_back_arrow.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.util.*
 import kotlin.collections.ArrayList
+import android.webkit.WebViewClient
 
 
-@Suppress("CAST_NEVER_SUCCEEDS", "DEPRECATION")
+@Suppress("CAST_NEVER_SUCCEEDS", "DEPRECATION", "NAME_SHADOWING",
+    "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE"
+)
 class ArticleActivity : AppCompatActivity() {
-
-
-    private val mainViewModel by viewModel<BookViewModel>()
+    private var position: Int = 0
+    private var bookLists: Int = 0
+    private var size: Int = 0
+    private var bookList: ArrayList<Book>? = null
 
     @SuppressLint("NewApi", "SetJavaScriptEnabled")
     @SuppressWarnings("unchecked")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(com.example.retrorxjava.R.layout.activity_article)
+        setContentView(R.layout.activity_article)
         val intent = this.intent
-        var position = intent.getIntExtra("Position", 0)
-        val BookList = intent.getSerializableExtra("BookList") as ArrayList<Book>
-        BookList.size
-        loadurl(BookList[position].url!!)
-        titlename.text = BookList[position].title
-        ButtonsEnable()
+        position = intent.getIntExtra("Position", 0)
+        bookList = intent.getSerializableExtra("BookList") as ArrayList<Book>
+        bookLists = bookList!!.size
+        size = bookLists - 1
+        loadeUrl(bookList!![position].url!!)
+        titlename.text = bookList!![position].title
+        buttonsEnable()
+
         next.setOnClickListener {
             position++
-            loadurl(BookList[position].url!!)
-            titlename.text = BookList[position].title
+            buttonsEnable()
+            loadeUrl(bookList!![position].url!!)
+            titlename.text = bookList!![position].title
 
         }
         previous.setOnClickListener {
             position--
-            loadurl(BookList[position].url!!)
-            titlename.text = BookList[position].title
+            buttonsEnable()
+            loadeUrl(bookList!![position].url!!)
+            titlename.text = bookList!![position].title
         }
 
-       backButton.setOnClickListener {
-           startActivity(ArticleActivity.intentFor(this))
-           finish()
-       }
+        backButton.setOnClickListener {
+            startActivity(intentFor(this))
+
+        }
+
+
     }
 
-    private fun ButtonsEnable() {
-        val position = intent.getIntExtra("Position", 0)
-        val BookList = intent.getSerializableExtra("BookList") as ArrayList<Book>
-        val size = BookList.size - 1
 
-
-        if (position == 0) {
-            previous.setEnabled(false)
-            next.setEnabled(true)
-           // next.setVisibility(View.VISIBLE);
-
-        } else if (position == size) {
-            previous.isEnabled = true
-            next.isEnabled = false
-           // next.setVisibility(View.INVISIBLE);
-
+    override fun onBackPressed() {
+        val myWebView = findViewById<WebView>(R.id.webview)
+        if (myWebView != null && myWebView.canGoBack()) {
+            position--
+            val title = bookList!![position].title
+            titlename.text = title
+            myWebView.goBack()
+            buttonsEnable()
+            return
         } else {
-            previous.isEnabled = true
-            next.isEnabled = true
-           // next.setVisibility(View.VISIBLE);
+            super.onBackPressed()
+        }
+    }
 
+
+    private fun buttonsEnable() {
+        when (position) {
+            0 -> {
+                previous.visibility = View.INVISIBLE
+                next.visibility = View.VISIBLE
+
+            }
+            size -> {
+                next.visibility = View.INVISIBLE
+                previous.visibility = View.VISIBLE
+
+            }
+            else -> {
+                next.visibility = View.VISIBLE
+                previous.visibility = View.VISIBLE
+
+            }
         }
     }
 
     @SuppressLint("NewApi", "SetJavaScriptEnabled")
-    private fun loadurl(text: String) {
-        val mWebView = findViewById(R.id.webview) as WebView
-        val webSettings = mWebView.settings
-        webSettings.javaScriptEnabled = true
-        WebView.setWebContentsDebuggingEnabled(false)
+    private fun loadeUrl(text: String) {
+        var redirect: Boolean = false
+        var loadingFinished = true
+
+        val webview: WebView = findViewById<WebView>(R.id.webview)
+        webview.webViewClient = WebViewClient()
+        webview.settings.javaScriptEnabled = true
+        webview.settings.loadWithOverviewMode = true
+        webview.settings.useWideViewPort = true
+        webview.settings.builtInZoomControls = true
+        webview.settings.displayZoomControls = false
+        webview.settings.setSupportZoom(true)
+        webview.isVerticalScrollBarEnabled = false
         val data = Uri.parse(text)
-        mWebView.loadUrl(data.toString())
+        val url = data.toString()
+        if (url.contains("pdf")) {
+            val uRl = "https://docs.google.com/gview?embedded=true&url=$url"
+            webview.loadUrl(uRl)
 
+        } else {
+            webview.loadUrl(url)
+        }
+
+
+        webview.webViewClient = object : WebViewClient() {
+            override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+                if (!loadingFinished) {
+                    redirect = true
+                }
+
+                loadingFinished = false
+                if (data.toString().contains(".pdf")) {
+                    val data = "http://docs.google.com/gview?embedded=true&url=$data"
+                    webview.loadUrl(data)
+                }
+                webview.loadUrl(data.toString())
+                return true
+            }
+            override fun onPageFinished(view: WebView, url: String) {
+                this@ArticleActivity.title = view.title
+            }
+        }
     }
-
     companion object {
         fun intentFor(context: Context): Intent {
-            return Intent(context,BookActivity::class.java).apply {
+            return Intent(context, BookActivity::class.java).apply {
 
             }
         }
