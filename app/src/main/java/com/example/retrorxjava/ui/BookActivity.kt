@@ -3,7 +3,6 @@ package com.example.retrorxjava.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.retrorxjava.R
 import com.example.retrorxjava.helper.NetworkHelper
@@ -18,7 +17,10 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 @Suppress("CAST_NEVER_SUCCEEDS")
 class BookActivity : AppCompatActivity(), Apiresult {
     private val mainViewModel by viewModel<BookViewModel>()
-    private val adapter: BookAdapter by lazy { BookAdapter(this) }
+    private var spaceInfoList: ArrayList<Book> = ArrayList()
+
+
+    private val adapter: BookAdapter by lazy { BookAdapter(this,spaceInfoList) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book)
@@ -27,7 +29,6 @@ class BookActivity : AppCompatActivity(), Apiresult {
         books_list.layoutManager = LinearLayoutManager(this)
         books_list.setHasFixedSize(true)
         books_list.adapter = adapter
-
 
         when {
             NetworkHelper.isNetworkConnected(this) -> mainViewModel.response(this)
