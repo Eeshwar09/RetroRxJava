@@ -6,6 +6,7 @@ import android.preference.PreferenceManager
 import com.example.retrorxjava.viewmodel.BookViewModel
 import com.example.retrorxjava.network.Api
 import com.example.retrorxjava.utils.AppConfig.baseUrl
+import com.example.retrorxjava.viewmodel.ArticleModel
 import com.google.gson.GsonBuilder
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
@@ -27,6 +28,10 @@ val retrofitModule = module {
 
     viewModel {
         BookViewModel(api = get())
+
+    }
+    viewModel {
+        ArticleModel()
     }
 
 
@@ -37,14 +42,14 @@ val retrofitModule = module {
 }
 
 val gson = GsonBuilder().serializeNulls().create()!!
-private fun createOkHttpClient(): OkHttpClient {
+ fun createOkHttpClient(): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     return OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor).build()
 }
 
-private fun retrofit(okHttpClient: OkHttpClient): Retrofit {
+ fun retrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .callFactory(OkHttpClient.Builder().build())
         .baseUrl(baseUrl)
@@ -56,7 +61,7 @@ private fun retrofit(okHttpClient: OkHttpClient): Retrofit {
 }
 
 
-private fun provideForecastApi(retrofit: Retrofit): Api {
+ fun provideForecastApi(retrofit: Retrofit): Api {
     return retrofit.create(Api::class.java)
 }
 
