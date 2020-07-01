@@ -42,14 +42,14 @@ val retrofitModule = module {
 }
 
 val gson = GsonBuilder().serializeNulls().create()!!
- fun createOkHttpClient(): OkHttpClient {
+fun createOkHttpClient(): OkHttpClient {
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
     return OkHttpClient.Builder()
         .addInterceptor(httpLoggingInterceptor).build()
 }
 
- fun retrofit(okHttpClient: OkHttpClient): Retrofit {
+fun retrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .callFactory(OkHttpClient.Builder().build())
         .baseUrl(baseUrl)
@@ -61,7 +61,7 @@ val gson = GsonBuilder().serializeNulls().create()!!
 }
 
 
- fun provideForecastApi(retrofit: Retrofit): Api {
+fun provideForecastApi(retrofit: Retrofit): Api {
     return retrofit.create(Api::class.java)
 }
 
