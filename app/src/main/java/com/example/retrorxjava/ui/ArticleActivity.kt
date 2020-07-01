@@ -36,7 +36,7 @@ class ArticleActivity : AppCompatActivity() {
         position = intent.getIntExtra("Position", 0)
         bookList = intent.getSerializableExtra("BookList") as ArrayList<Book>?
         bookLists = bookList?.size
-        size = bookLists?.minus(1)
+        size = bookLists?.minus(2)
         bookList?.get(position)?.url?.let { mainViewModel.loadeUrl(it,webview,progressBar) }
         titlename.text = bookList?.get(position)?.title
         buttonsEnable()
