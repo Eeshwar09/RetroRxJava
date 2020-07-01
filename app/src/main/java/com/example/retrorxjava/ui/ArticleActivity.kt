@@ -13,20 +13,17 @@ import android.view.View
 import com.example.retrorxjava.model.Book
 import kotlinx.android.synthetic.main.activity_article.*
 import kotlinx.android.synthetic.main.toolbar_back_arrow.*
-import kotlin.collections.ArrayList
 import com.example.retrorxjava.viewmodel.ArticleModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 
-@Suppress(
-    "CAST_NEVER_SUCCEEDS", "DEPRECATION", "NAME_SHADOWING",
-    "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE"
-)
+@Suppress("CAST_NEVER_SUCCEEDS", "DEPRECATION", "NAME_SHADOWING", "ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
 class ArticleActivity : AppCompatActivity() {
     private var position: Int = 0
-    private var bookLists: Int = 0
-    private var size: Int = 0
-    private var bookList: ArrayList<Book>? = null
+    private var bookLists: Int? = null
+    private var size: Int? = 0
+    private var bookList:ArrayList<Book> ?=ArrayList<Book>()
     private val mainViewModel by viewModel<ArticleModel>()
 
 
@@ -37,11 +34,11 @@ class ArticleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_article)
         val intent = this.intent
         position = intent.getIntExtra("Position", 0)
-        bookList = intent.getSerializableExtra("BookList") as ArrayList<Book>
-        bookLists = bookList!!.size
-        size = bookLists - 1
-        mainViewModel.loadeUrl(bookList!![position].url!!,webview,progressBar)
-        titlename.text = bookList!![position].title
+        bookList = intent.getSerializableExtra("BookList") as ArrayList<Book>?
+        bookLists = bookList?.size
+        size = bookLists?.minus(1)
+        bookList?.get(position)?.url?.let { mainViewModel.loadeUrl(it,webview,progressBar) }
+        titlename.text = bookList?.get(position)?.title
         buttonsEnable()
 
         next.setOnClickListener {
