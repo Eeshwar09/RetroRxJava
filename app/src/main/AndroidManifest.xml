@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".di.MyCustomApp"
+        android:name=".home.di.MyCustomApp"
         android:allowBackup="true"
         android:enabled="true"
         android:icon="@drawable/ic_hello"
@@ -15,15 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.ArticleActivity"></activity>
-        <activity android:name=".ui.WelcomeActivity">
+        <activity android:name=".base.BaseActivity"></activity>
+        <activity android:name=".web.ui.WebActivity" />
+        <activity android:name=".home.ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.BookActivity" />
+        <activity android:name=".home.ui.HomeActivity" />
     </application>
 
 </manifest>

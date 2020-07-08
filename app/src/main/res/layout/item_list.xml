@@ -11,8 +11,8 @@
         <import type="androidx.core.content.ContextCompat" />
 
         <variable
-            name="book"
-            type="com.example.retrorxjava.model.Book" />
+            name="news"
+            type="com.example.retrorxjava.home.model.News" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,7 +49,7 @@
                     android:autoLink="web"
                     android:cursorVisible="true"
                     android:linksClickable="true"
-                    android:text="@{book.title}"
+                    android:text="@{news.title}"
                     android:textSize="18sp"
                     android:textColor="@color/colorBlue"
                     app:layout_constraintStart_toEndOf="parent"
@@ -64,7 +64,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="12dp"
-                    android:text="@{book.id}"
+                    android:text="@{news.id}"
                     android:textSize="12sp"
                     android:autoLink="web"
                     android:textColorLink="@color/colorBlue"
@@ -103,7 +103,7 @@
                     android:autoLink="web"
                     android:linksClickable="true"
                     android:visibility="gone"
-                    android:text="@{book.url}"
+                    android:text="@{news.url}"
                     android:textColorLink="@color/colorBlue"
                     app:layout_constraintEnd_toEndOf="@+id/bookHtml"
                     app:layout_constraintStart_toStartOf="@+id/bookHtml"
@@ -125,7 +125,7 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="12dp"
                     android:layout_gravity="bottom"
-                    android:text="@{book.author}"
+                    android:text="@{news.author}"
                     tools:text="fhjgjgjjg"
                     tools:ignore="HardcodedText" />
 
