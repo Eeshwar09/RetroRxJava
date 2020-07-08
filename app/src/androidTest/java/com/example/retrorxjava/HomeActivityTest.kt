@@ -62,6 +62,7 @@ class HomeActivityTest : AndroidJUnitRunner() {
     @Test
     fun adapter() {
         val activity = rule.activity
+
         val viewById = activity.findViewById<RecyclerView>(R.id.news_list)
         rule.launchActivity(null)
         assertThat(viewById, notNullValue())
