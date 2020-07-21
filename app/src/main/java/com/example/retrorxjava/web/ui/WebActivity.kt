@@ -9,7 +9,6 @@ import android.os.Bundle
 import com.example.retrorxjava.R
 import android.webkit.WebView
 import android.view.View
-import android.widget.ProgressBar
 import com.example.retrorxjava.base.BaseActivity
 import com.example.retrorxjava.home.model.News
 import com.example.retrorxjava.home.ui.HomeActivity
@@ -28,9 +27,9 @@ import java.util.*
 )
 class WebActivity : BaseActivity() {
     private var position: Int = 0
-    private var bookLists: Int? = null
+    private var newsLists: Int? = null
     private var size: Int? = 0
-    private var title1:String? =""
+    private var title1: String? = ""
     private var newsList: ArrayList<News>? = ArrayList()
     private val webViewModel by viewModel<WebViewModel>()
 
@@ -43,8 +42,8 @@ class WebActivity : BaseActivity() {
         val intent = this.intent
         position = intent.getIntExtra("Position", 0)
         newsList = intent.getSerializableExtra("BookList") as ArrayList<News>?
-        bookLists = newsList?.size
-        size = bookLists?.minus(1)
+        newsLists = newsList?.size
+        size = newsLists?.minus(1)
         newsList?.get(position)?.url?.let { webViewModel.loadUrl(it, webview) }
         title1 = newsList?.get(position)?.title
         initlizeViews()
@@ -54,15 +53,15 @@ class WebActivity : BaseActivity() {
         next.setOnClickListener {
             position++
             buttonsEnable()
-            webViewModel.loadUrl(newsList!![position].url!!, webview)
-            titleName.text = newsList!![position].title
+            newsList?.get(position)?.url?.let { webViewModel.loadUrl(it, webview) }
+            title1 = newsList?.get(position)?.title
 
         }
         previous.setOnClickListener {
             position--
             buttonsEnable()
-            webViewModel.loadUrl(newsList!![position].url!!, webview)
-            titleName.text = newsList!![position].title
+            newsList?.get(position)?.url?.let { webViewModel.loadUrl(it, webview) }
+            title1 = newsList?.get(position)?.title
         }
 
         backButton.setOnClickListener {
@@ -74,7 +73,7 @@ class WebActivity : BaseActivity() {
     }
 
     private fun initlizeViews() {
-        if (title1 !=null){
+        if (title1 != null) {
             setScreenTitle(title1!!)
         }
         getBackButton()

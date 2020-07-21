@@ -18,10 +18,15 @@ class MyCustomApp: Application() {
         startKoin {
             androidLogger(Level.DEBUG)
             androidContext(this@MyCustomApp)
-            modules(listOf(hackerModule, moduel))
+            modules(listOf(hackerModule, viewModuel))
         }
 
 
+    }
+    internal fun loadModules(module: Module, block: () -> Unit) {
+        loadKoinModules(module)
+        block()
+        unloadKoinModules(module)
     }
 
 }

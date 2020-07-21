@@ -1,7 +1,7 @@
 package com.example.retrorxjava.home.viewmodel
 
 import androidx.lifecycle.MutableLiveData
-import com.example.retrorxjava.UseCaseResult
+import com.example.retrorxjava.home.helper.UseCaseResult
 import com.example.retrorxjava.base.BaseViewModel
 import com.example.retrorxjava.home.model.News
 import com.example.retrorxjava.home.network.HackerNewsApi

@@ -13,12 +13,14 @@ import com.example.retrorxjava.home.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_book.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@Suppress("CAST_NEVER_SUCCEEDS", "DEPRECATION", "UNCHECKED_CAST")
+@Suppress("CAST_NEVER_SUCCEEDS", "DEPRECATION", "UNCHECKED_CAST", "TYPEALIAS_EXPANSION_DEPRECATION")
 class HomeActivity : BaseActivity() {
     private val homeViewModel by viewModel<HomeViewModel>()
 
 
     private lateinit var adapter: NewsListAdapter
+    private var newsInfoList: ArrayList<News> = ArrayList()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,19 +45,18 @@ class HomeActivity : BaseActivity() {
 
     }
 
-    private fun setAdapter(spaceList: List<News>) {
+    private fun setAdapter(newsList: List<News>) {
         if (!::adapter.isInitialized) {
-            adapter = NewsListAdapter(spaceList)
+            adapter = NewsListAdapter(newsList)
             news_list.adapter = adapter
             adapter.notifyDataSetChanged()
 
 
         } else {
-            adapter.setList(spaceList)
-            adapter.notifyDataSetChanged()
+            adapter.setList(newsList)
         }
 
-
+        newsInfoList = ArrayList(newsList)
     }
 
     private fun initlizeViews() {

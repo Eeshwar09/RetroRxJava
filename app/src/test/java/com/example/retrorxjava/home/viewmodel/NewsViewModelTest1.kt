@@ -12,12 +12,11 @@ import org.mockito.MockitoAnnotations
 import org.mockito.stubbing.OngoingStubbing
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.retrorxjava.UseCaseResult
+import com.example.retrorxjava.home.helper.UseCaseResult
 import com.example.retrorxjava.home.di.hackerModule
 import com.nhaarman.mockitokotlin2.verify
 import io.reactivex.Observable
 import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import org.junit.*
 import org.koin.dsl.koinApplication
@@ -85,7 +84,7 @@ class NewsViewModelTest1 : KoinTest {
         whenever(hackerNewsApi.getNews()).thenReturn(Observable.just(trendingData))
 
         homeViewModelTest.loadNewsData()
-//        verify(UseCaseResult.Success(trendingData))
+
 
 
     }

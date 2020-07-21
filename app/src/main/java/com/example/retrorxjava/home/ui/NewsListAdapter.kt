@@ -17,38 +17,39 @@ import java.util.ArrayList
 
 @Suppress("UNCHECKED_CAST")
 class NewsListAdapter(
-    private var newsList: List<News>
+    private var newsList: List<*>? = null
 
-) : RecyclerView.Adapter<NewsListAdapter.BookViewHolder>() {
+) : RecyclerView.Adapter<NewsListAdapter.NewsViewHolder>() {
     private lateinit var context: Context
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = ItemListBinding.inflate(layoutInflater, parent, false)
         context = parent.context
-        return BookViewHolder(binding, context)
+        return NewsViewHolder(binding, context)
 
 
     }
 
     override fun getItemCount() =
-        newsList.size
+        newsList!!.size
 
 
     fun setList(list: List<News>) {
         this.newsList = list
-        notifyDataSetChanged()
+        list.size
+
 
     }
 
-    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
-        holder.bindModel(newsList[position], newsList as ArrayList<News>)
+    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+        holder.bindModel(newsList!![position] as News, newsList as ArrayList<News>)
     }
 
 
     @Suppress("CAST_NEVER_SUCCEEDS")
-    class BookViewHolder(private val binding: ItemListBinding, private val context: Context) :
+    class NewsViewHolder(private val binding: ItemListBinding, private val context: Context) :
         RecyclerView.ViewHolder(binding.root) {
         private val date = binding.datepublished
 

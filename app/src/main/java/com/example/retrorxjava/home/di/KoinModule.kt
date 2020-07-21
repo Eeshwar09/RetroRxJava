@@ -6,8 +6,6 @@ import android.preference.PreferenceManager
 import com.example.retrorxjava.home.viewmodel.HomeViewModel
 import com.example.retrorxjava.home.network.HackerNewsApi
 import com.example.retrorxjava.home.utils.AppConfig
-import com.example.retrorxjava.home.utils.AppConfig.baseUrl
-import com.example.retrorxjava.web.viewmodel.WebViewModel
 import com.google.gson.GsonBuilder
 import io.reactivex.schedulers.Schedulers
 import okhttp3.OkHttpClient
@@ -65,13 +63,10 @@ fun retrofit(baseUrl:String): Retrofit {
 }
 
 
-fun provideForecastApi(retrofit: Retrofit): HackerNewsApi {
-    return retrofit.create(HackerNewsApi::class.java)
-}
 
 
 
- val moduel = module(override = true) {
+ val viewModuel = module(override = true) {
      viewModel {
          HomeViewModel(hackerNewsApi = get())
      }
