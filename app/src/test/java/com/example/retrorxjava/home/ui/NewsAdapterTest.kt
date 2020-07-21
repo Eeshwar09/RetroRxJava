@@ -1,22 +1,18 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.retrorxjava
+package com.example.retrorxjava.home.ui
 
-import android.content.Context
 import android.view.View
 import androidx.fragment.app.Fragment
 import org.junit.Test
 import org.junit.Assert.*
 import com.example.retrorxjava.home.model.News
-import com.example.retrorxjava.home.ui.NewsListAdapter
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import org.junit.After
 import org.junit.Before
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
 import org.mockito.Mockito.mock
-import org.mockito.Mockito
 import java.util.*
 import kotlin.collections.ArrayList
 

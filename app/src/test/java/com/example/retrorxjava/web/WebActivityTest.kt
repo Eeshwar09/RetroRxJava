@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package com.example.retrorxjava.home.ui
+package com.example.retrorxjava.web
 
 import android.content.Intent
 import org.junit.After
@@ -24,6 +24,7 @@ import com.example.retrorxjava.home.MyCustomAppTest
 import com.example.retrorxjava.home.di.createOkHttpClient
 import com.example.retrorxjava.home.di.retrofit
 import com.example.retrorxjava.home.network.HackerNewsApi
+import com.example.retrorxjava.home.ui.HomeActivity
 import com.example.retrorxjava.home.utils.AppConfig
 import com.example.retrorxjava.web.ui.WebActivity
 import com.example.retrorxjava.web.viewmodel.WebViewModel

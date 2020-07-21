@@ -21,7 +21,7 @@ import com.example.retrorxjava.web.ui.WebActivity
 import org.junit.Before
 
 
-class WebActivityTest1 {
+class WebActivityTest {
     @Before
     fun setUp() {
         // enable java script for web page to perform web interactions
